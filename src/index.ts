@@ -6,21 +6,43 @@
 * @since   2021-12-04
 */
 
-import * as readline from 'readline';
+'use strict'
 
-function (s: someString) {
-    // Some text
-    return "some text" + someString;
+const ps = require('prompt-sync')
+const prompt = ps()
+
+function asteristics (integer: number, spacesNum: number = 0) {
+  // Generate asteristics.
+  const AST: string = '*'
+  let outPut: string = ''
+
+  for (let counter: number = 0; counter < spacesNum; counter++) {
+    outPut = ' ' + outPut
+  }
+
+  if (integer === 1) {
+    console.log(outPut + AST)
+    console.log(outPut + AST)
+  } else {
+    for (let counter1: number = 0; counter1 < integer; counter1++) {
+      outPut = outPut + AST
+    }
+
+    console.log(outPut)
+
+    asteristics(integer - 1, spacesNum + 1)
+
+    console.log(outPut)
+  }
 }
 
-console.log("Some question");
+const input: string = prompt('Insert an integer:')
+const inputNum: number = parseInt(input)
 
-var rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
+if (isNaN(inputNum)) {
+  console.log('This is not a number.')
+} else {
+  asteristics(inputNum)
+}
 
-rl.question("", function(answer) {
-  console.log("Thank you for your valuable feedback:", answer);
-  rl.close();
-});
+console.log('Done.')
